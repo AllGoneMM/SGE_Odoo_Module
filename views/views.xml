@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="c:\users\shady\desktop\.list">
+      <field name="name">C:\Users\shady\Desktop\ list</field>
+      <field name="model">c:\users\shady\desktop\.c:\users\shady\desktop\</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="c:\users\shady\desktop\.action_window">
+      <field name="name">C:\Users\shady\Desktop\ window</field>
+      <field name="res_model">c:\users\shady\desktop\.c:\users\shady\desktop\</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="c:\users\shady\desktop\.action_server">
+      <field name="name">C:\Users\shady\Desktop\ server</field>
+      <field name="model_id" ref="model_c:\users\shady\desktop\_c:\users\shady\desktop\"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="C:\Users\shady\Desktop\" id="c:\users\shady\desktop\.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="c:\users\shady\desktop\.menu_1" parent="c:\users\shady\desktop\.menu_root"/>
+    <menuitem name="Menu 2" id="c:\users\shady\desktop\.menu_2" parent="c:\users\shady\desktop\.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="c:\users\shady\desktop\.menu_1_list" parent="c:\users\shady\desktop\.menu_1"
+              action="c:\users\shady\desktop\.action_window"/>
+    <menuitem name="Server to list" id="c:\users\shady\desktop\" parent="c:\users\shady\desktop\.menu_2"
+              action="c:\users\shady\desktop\.action_server"/>
+-->
+  </data>
+</odoo>
