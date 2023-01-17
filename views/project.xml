@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+ <!--Definición de la vista KANBAN-->
+    <record id="view_project_kanban" model="ir.ui.view">
+        <field name="name">enterprise.project.kanban</field>
+        <field name="model">enterprise.project</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"></field>
+                <field name="startDate"></field>
+                <field name="deadLine"></field>
+                <field name="state"></field>
+                <field name="description"></field>
+
+
+                <templates>
+                    <t t-name="kanban-box">
+                       <div t-attf-class="oe_kanban_global_click">
+                            <div class ="oe_kanban_details">
+
+                                <ul>
+                                    <li> 
+                                        Nombre del proyecto: <field name="name"></field>
+                                    </li>
+                                    
+                                    <li> 
+                                        Fecha de inicio: <field name="startDate"></field>
+                                    </li>
+                                    
+                                    <li> 
+                                        Fecha de entrega: <field name="deadLine"></field>
+                                    </li>
+                                    
+                                    <li> 
+                                        Estado: <field name="state"></field>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+   
+
+    <!--Definición de la vista SEARCH-->
+    <record id="view_project_search" model="ir.ui.view">
+        <field name="name">enterprise.project.search</field>
+        <field name="model">enterprise.project</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"></field>
+                <field name="state"></field>
+                <separator/>
+                <filter name="draft" string="Borrador" domain="[('state', '=', 'draft')]" />
+                <filter name="wip" string="En progreso" domain="[('state', '=', 'wip')]" />
+                <filter name="done" string="Finalizado" domain="[('state', '=', 'done')]" />
+                <filter name="cancel" string="Cancelado" domain="[('state', '=', 'cancel')]" />
+                
+                <group expand="1" string="Group By">
+                    <filter name="state" string="Estado" context="{'group_by': 'state'}" />
+                    <filter name="name" string="Nombre del proyecto" context="{'group_by': 'name'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--Definición de la vista TREE-->
+    <record id="view_project_tree" model="ir.ui.view">
+        <field name="name">enterprise.project.tree</field>
+        <field name="model">enterprise.project</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="name"></field>
+                <field name="state"></field>
+                <field name="startDate"></field>
+                <field name="deadLine"></field>
+            </tree>
+        </field>
+    </record>
+    
+    <!--Definición de la vista FORM-->
+    <record id="view_project_form" model="ir.ui.view">
+        <field name="name">enterprise.project.form</field>
+        <field name="model">enterprise.project</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id="button_wip" name="action_wip"  string="Empezar proyecto" class="btn-primary" type="object" states ="draft"></button>
+                    <button id="button_done" name="action_done"  string="Finalizar" class="btn-primary" type="object" states ="wip"></button>
+                    <button id="button_draft" name="action_draft"  string="Pasar a borrador" class="btn-primary" type="object" states ="cancel"></button>
+                    <button id="button_cancel" name="action_cancel"  string="Cancelar proyecto" type="object" states ="draft,done,wip"></button>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,wip,done" ></field>
+                </header>
+                <sheet>
+                    <group>
+                        <group name="left_group" string="Información del proyecto">
+                            <field name="name"></field>
+                            <field name="description"></field>
+                            <field name="state"></field>
+                        </group>
+                        <group name="rigth_group" string="Fechas significativas">
+                            <field name="startDate"></field>
+                            <field name="deadLine"></field>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Definición del ACTION principal-->
+    <record id="project_action" model="ir.actions.act_window">
+        <field name="name">projects</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">enterprise.project</field>
+        <field name="view_mode">tree,kanban,form</field>
+       <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">Create your first project!</p>
+        </field>
+    </record>
+
+
+ <menuitem
+        id="menu_project_root"
+        name="Proyectos"
+        parent="worker_root"
+        sequence="20"/>
+    
+    <menuitem
+        id="menu_project"
+        name="Listado de proyectos"
+        parent="menu_project_root"   
+        action="project_action"
+        sequence="10"/>
+
+</odoo>

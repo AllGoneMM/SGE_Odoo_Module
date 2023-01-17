@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!--Definición de la vista KANBAN-->
+    <record id="view_worker_kanban" model="ir.ui.view">
+        <field name="name">person.worker.kanban</field>
+        <field name="model">person.worker</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"></field>
+                <field name="gender"></field>
+                <field name="age"></field>
+                <field name="description"></field>
+                <field name="role"></field>
+
+                <templates>
+                    <t t-name="kanban-box">
+                       <div t-attf-class="oe_kanban_global_click">
+                            <div class ="oe_kanban_details">
+
+                                <ul>
+                                    <li> 
+                                        Nombre: <field name="name"></field>
+                                    </li>
+                                    
+                                    <li> 
+                                        Edad: <field name="age"></field>
+                                    </li>
+                                    
+                                    <li> 
+                                        Género: <field name="gender"></field>
+                                    </li>
+                                    
+                                    <li> 
+                                        Descripción: <field name="description"></field>
+                                    </li>
+                                    
+                                    <li> 
+                                        Puesto de trabajo: <field name="role"></field>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!--Definición de la vista SEARCH-->
+    <record id="view_worker_search" model="ir.ui.view">
+        <field name="name">person.worker.search</field>
+        <field name="model">person.worker</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"></field>
+                <field name="description"></field>
+                <field name="role"></field>
+                <separator/>
+                <filter name="male" string="Hombre" domain="[('gender', '=', 'male')]" />
+                <filter name="female" string="Mujer" domain="[('gender', '=', 'female')]" />
+                <filter name="other" string="Otros" domain="[('gender', '=', 'other')]" />
+                
+                <group expand="1" string="Group By">
+                    <filter name="gender" string="Género" context="{'group_by': 'gender'}" />
+                    <filter name="name" string="Nombre del trabajador" context="{'group_by': 'name'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--Definición de la vista TREE-->
+    <record id="view_worker_tree" model="ir.ui.view">
+        <field name="name">person.worker.tree</field>
+        <field name="model">person.worker</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="name"></field>
+                <field name="gender"></field>
+                <field name="age"></field>
+                <field name="role"></field>
+                <field name="description"></field>
+            </tree>
+        </field>
+    </record>
+    
+    <!--Definición de la vista FORM-->
+    <record id="view_worker_form" model="ir.ui.view">
+        <field name="name">person.worker.form</field>
+        <field name="model">person.worker</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group name="left_group" string="Datos personales">
+                            <field name="name"></field>
+                            <field name="age"></field>
+                            <field name="gender"></field>
+                        </group>
+                        <group name="rigth_group" string="Otros asuntos">
+                            <field name="role"></field>
+                            <field name="description"></field>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Definición del ACTION principal-->
+    <record id="worker_action" model="ir.actions.act_window">
+        <field name="name">workers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">person.worker</field>
+        <field name="view_mode">tree,kanban,form</field>
+       <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">¿No sabes que hacer? ¡Crea un empleado!</p>
+        </field>
+    </record>
+
+    <!--Definiciónes del menu principal - similar a NAV en HTML -->
+    <menuitem
+        id="worker_root"
+        name="SGE Management"
+        sequence="10"/>
+
+    <menuitem
+        id="enterprise_worker_root"
+        name="Trabajadores"
+        parent="worker_root"
+        sequence="10"/>
+    
+    <menuitem
+        id="hospital_worker"
+        name="Lista de trabajadores"
+        parent="enterprise_worker_root"
+        action ="worker_action"
+        sequence="10"/>
+</odoo>
