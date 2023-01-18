@@ -40,7 +40,18 @@ class PersonWorker(models.Model):
     # Rama profesional del empleado
 
     description = fields.Text(string = 'Descripción')
+
+    project_id = fields.Many2one('enterprise.project', string="Proyecto asignado", required=True)
+
+    deadLine = fields.Date(string='Fecha final',related='project_id.deadLine',tracking=True)
     
     
 
     #Métodos
+
+    @api.onchange('project_id')
+    def onchange_project_id(self):
+        if self.project_id:
+            if self.project_id.deadLine:
+                self.deadLine = self.project_id.deadLine
+   

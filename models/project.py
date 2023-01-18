@@ -17,19 +17,22 @@ class EnterpriseProject(models.Model):
    
     description = fields.Text(string = 'Descripción')
     state = fields.Selection([
-        ('draft','Borrador'),
-        ('wip','En progreso'),
+        ('draft','Análisis'),
+        ('confirm','Desarrollo'),
         ('done','Finalizado'),
         ('cancel','Cancelado')
-    ],string="Status",default='Borrador')
+    ],string="Status",default='draft')
+    
+    worker_ids = fields.One2many('person.worker','name',string = 'Trabajadores asignados')
+
     
     
 
     #Métodos
 
     # Método que cambia la propiedad state para el botón del header
-    def action_wip(self):
-        self.state = 'wip'
+    def action_confirm(self):
+        self.state = 'confirm'
 
     # Método que cambia la propiedad state para el botón del header
     def action_done(self):
