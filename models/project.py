@@ -25,7 +25,7 @@ class EnterpriseProject(models.Model):
     ],string="Status",default='draft',tracking = True)
     
     worker_ids = fields.One2many('person.worker','name',string = 'Trabajadores asignados',tracking = True)
-    worker_count =fields.Integer(string='Número de empleados', compute='get_workers_count' tracking = True)
+    worker_count =fields.Integer(string='Número de empleados', compute='get_workers_count',tracking = True)
     
 
 
