@@ -119,7 +119,7 @@
 
     <!--Definición del ACTION principal-->
     <record id="worker_action" model="ir.actions.act_window">
-        <field name="name">workers</field>
+        <field name="name">Empleados</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">person.worker</field>
         <field name="view_mode">tree,kanban,form</field>
@@ -131,7 +131,7 @@
     <!--Definiciónes del menu principal - similar a NAV en HTML -->
     <menuitem
         id="worker_root"
-        name="SGE Management"
+        name="SGE Pablo y Mykyta"
         sequence="10"/>
 
     <menuitem

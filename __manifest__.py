@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "SGE Módulo - Gestor de Proyectos",
+    'name': "SGE Módulo - Pablo & Mykyta",
 
     'summary': """
        Gestor de proyectos""",
@@ -19,7 +19,10 @@
     
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': [
+        'base',
+        'mail'
+        ],
 
     # always loaded
     'data': [

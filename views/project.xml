@@ -9,10 +9,8 @@
     <field name="model">enterprise.project</field>
     <field name="arch" type="xml">
         <calendar string=" Calendario" date_start="startDate" color="worker_ids">
-            
             <field name="name"></field>
-            <field name="worker_ids"></field>
-
+            <field name="deadLine"></field>
         </calendar>
     </field>
  </record>
@@ -28,31 +26,24 @@
                 <field name="deadLine"></field>
                 <field name="state"></field>
                 <field name="description"></field>
-
-
                 <templates>
                     <t t-name="kanban-box">
                        <div t-attf-class="oe_kanban_global_click">
                             <div class ="oe_kanban_details">
-
                                 <ul>
                                     <li> 
                                         Nombre del proyecto: <field name="name"></field>
-                                    </li>
-                                    
+                                    </li>                                    
                                     <li> 
                                         Fecha de inicio: <field name="startDate"></field>
                                     </li>
-                                    
                                     <li> 
                                         Fecha de entrega: <field name="deadLine"></field>
                                     </li>
-                                    
                                     <li> 
                                         Estado: <field name="state"></field>
                                     </li>
                                 </ul>
-
                             </div>
                         </div>
                     </t>
@@ -117,7 +108,13 @@
                         <group name="left_group" string="Información del proyecto">
                             <field name="name"></field>
                             <field name="description"></field>
-                            <field name="worker_ids"></field>
+                            <field name="worker_ids">
+                                <tree editable="bottom">
+                                    <field name="name"></field>
+                                    <field name="role"></field>
+                                    <field name="description"></field>
+                                </tree>
+                            </field>
                         </group>
                         <group name="rigth_group" string="Fechas significativas">
                             <field name="startDate"></field>
@@ -125,18 +122,23 @@
                         </group>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                <field name="message_follower_ids"></field>
+                <field name="activity_ids"></field>
+                <field name="message_ids"></field>
+                </div>
             </form>
         </field>
     </record>
 
     <!--Definición del ACTION principal-->
     <record id="project_action" model="ir.actions.act_window">
-        <field name="name">projects</field>
+        <field name="name">Proyectos</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">enterprise.project</field>
         <field name="view_mode">tree,kanban,form,calendar</field>
        <field name="help" type="html">
-          <p class="o_view_nocontent_smiling_face">Create your first project!</p>
+          <p class="o_view_nocontent_smiling_face">¡Crea tu primer Proyecto!</p>
         </field>
     </record>
 
