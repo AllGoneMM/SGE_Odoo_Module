@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_enterprise_project,access.enterprise.project,model_enterprise_project,,1,1,1,1
+access_enterprise_project_lines,access.enterprise.project.lines,model_enterprise_project_lines,,1,1,1,1
 access_person_worker,access.person.worker,model_person_worker,,1,1,1,1

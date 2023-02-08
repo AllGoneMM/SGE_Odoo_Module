@@ -2,20 +2,21 @@
 
 <odoo>
 
- <!--Definición de la vista CALENDAR-->
+    <!--Definición de la vista CALENDAR-->
 
- <record id="view_project_calendar" model="ir.ui.view">
-    <field name="name">enterprise.project.calendar</field>
-    <field name="model">enterprise.project</field>
-    <field name="arch" type="xml">
-        <calendar string=" Calendario" date_start="startDate" color="worker_ids">
-            <field name="name"></field>
-            <field name="deadLine"></field>
-        </calendar>
-    </field>
- </record>
+    <record id="view_project_calendar" model="ir.ui.view">
+        <field name="name">enterprise.project.calendar</field>
+        <field name="model">enterprise.project</field>
+        <field name="arch" type="xml">
+            <calendar string=" Calendario" date_start="startDate">
+                <field name="name"></field>
+                <field name="deadLine"></field>
+            </calendar>
+        </field>
+    </record>
 
- <!--Definición de la vista KANBAN-->
+    <!--Definición
+    de la vista KANBAN-->
     <record id="view_project_kanban" model="ir.ui.view">
         <field name="name">enterprise.project.kanban</field>
         <field name="model">enterprise.project</field>
@@ -28,20 +29,16 @@
                 <field name="description"></field>
                 <templates>
                     <t t-name="kanban-box">
-                       <div t-attf-class="oe_kanban_global_click">
-                            <div class ="oe_kanban_details">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
                                 <ul>
-                                    <li> 
-                                        Nombre del proyecto: <field name="name"></field>
-                                    </li>                                    
-                                    <li> 
-                                        Fecha de inicio: <field name="startDate"></field>
+                                    <li> Nombre del proyecto: <field name="name"></field>
                                     </li>
-                                    <li> 
-                                        Fecha de entrega: <field name="deadLine"></field>
+                                    <li> Fecha de inicio: <field name="startDate"></field>
                                     </li>
-                                    <li> 
-                                        Estado: <field name="state"></field>
+                                    <li> Fecha de entrega: <field name="deadLine"></field>
+                                    </li>
+                                    <li> Estado: <field name="state"></field>
                                     </li>
                                 </ul>
                             </div>
@@ -51,9 +48,10 @@
             </kanban>
         </field>
     </record>
-   
 
-    <!--Definición de la vista SEARCH-->
+
+    <!--Definición
+    de la vista SEARCH-->
     <record id="view_project_search" model="ir.ui.view">
         <field name="name">enterprise.project.search</field>
         <field name="model">enterprise.project</field>
@@ -61,12 +59,12 @@
             <search>
                 <field name="name"></field>
                 <field name="state"></field>
-                <separator/>
+                <separator />
                 <filter name="draft" string="Borrador" domain="[('state', '=', 'draft')]" />
                 <filter name="confirm" string="En progreso" domain="[('state', '=', 'confirm')]" />
                 <filter name="done" string="Finalizado" domain="[('state', '=', 'done')]" />
                 <filter name="cancel" string="Cancelado" domain="[('state', '=', 'cancel')]" />
-                
+
                 <group expand="1" string="Group By">
                     <filter name="state" string="Estado" context="{'group_by': 'state'}" />
                     <filter name="name" string="Nombre del proyecto" context="{'group_by': 'name'}" />
@@ -75,85 +73,100 @@
         </field>
     </record>
 
-    <!--Definición de la vista TREE-->
+    <!--Definición
+    de la vista TREE-->
     <record id="view_project_tree" model="ir.ui.view">
         <field name="name">enterprise.project.tree</field>
         <field name="model">enterprise.project</field>
         <field name="arch" type="xml">
-            <tree >
+            <tree>
                 <field name="name"></field>
                 <field name="state"></field>
                 <field name="startDate"></field>
                 <field name="deadLine"></field>
-                <field name="worker_ids"></field>
+                <field name="project_lines" string = "Número de trabajadores"></field>
             </tree>
         </field>
     </record>
-    
-    <!--Definición de la vista FORM-->
+
+    <!--Definición
+    de la vista FORM-->
     <record id="view_project_form" model="ir.ui.view">
         <field name="name">enterprise.project.form</field>
         <field name="model">enterprise.project</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button id="button_confirm" name="action_confirm"  string="Desarrollo" class="btn-primary" type="object" states ="draft" confirm="Seguro que quieres pasar al estado: Desarrollo?"></button>
-                    <button id="button_done" name="action_done"  string="Finalizar" class="btn-primary" type="object" states ="confirm" confirm="Seguro que quieres pasar al estado: Finalizar?"></button>
-                    <button id="button_draft" name="action_draft"  string="Análisis" class="btn-primary" type="object" states ="cancel" confirm="Seguro que quieres pasar al estado: Análisis?"></button>
-                    <button id="button_cancel" name="action_cancel"  string="Cancelar" type="object" states ="draft,done,confirm" confirm="Seguro que quieres pasar al estado: Cancelado?"></button>
-                    <field name="state" widget="statusbar" statusbar_visible='draft,done,confirm' ></field>
+                    <button id="button_confirm" name="action_confirm" string="Desarrollo"
+                        class="btn-primary" type="object" states="draft"
+                        confirm="Seguro que quieres pasar al estado: Desarrollo?"></button>
+                    <button id="button_done" name="action_done" string="Finalizar"
+                        class="btn-primary" type="object" states="confirm"
+                        confirm="Seguro que quieres pasar al estado: Finalizar?"></button>
+                    <button id="button_draft" name="action_draft" string="Análisis"
+                        class="btn-primary" type="object" states="cancel"
+                        confirm="Seguro que quieres pasar al estado: Análisis?"></button>
+                    <button id="button_cancel" name="action_cancel" string="Cancelar" type="object"
+                        states="draft,done,confirm"
+                        confirm="Seguro que quieres pasar al estado: Cancelado?"></button>
+                    <field name="state" widget="statusbar" statusbar_visible='draft,done,confirm'></field>
                 </header>
                 <sheet>
                     <group>
                         <group name="left_group" string="Información del proyecto">
                             <field name="name"></field>
                             <field name="description"></field>
-                            <field name="worker_ids">
-                                <tree editable="bottom">
-                                    <field name="name"></field>
-                                    <field name="role"></field>
-                                    <field name="description"></field>
-                                </tree>
-                            </field>
                         </group>
                         <group name="rigth_group" string="Fechas significativas">
                             <field name="startDate"></field>
                             <field name="deadLine"></field>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Empleados del proyecto">
+                            <field name="project_lines">
+                                <tree editable="bottom">
+                                    <field name="worker_id"></field>
+                                    <field name="worker_role"></field>
+                                    <field name="project_id" invisible="1"></field>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
-                <field name="message_follower_ids"></field>
-                <field name="activity_ids"></field>
-                <field name="message_ids"></field>
+                    <field name="message_follower_ids"></field>
+                    <field name="activity_ids"></field>
+                    <field name="message_ids"></field>
                 </div>
             </form>
         </field>
     </record>
 
-    <!--Definición del ACTION principal-->
+    <!--Definición
+    del ACTION principal-->
     <record id="project_action" model="ir.actions.act_window">
         <field name="name">Proyectos</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">enterprise.project</field>
         <field name="view_mode">tree,kanban,form,calendar</field>
-       <field name="help" type="html">
-          <p class="o_view_nocontent_smiling_face">¡Crea tu primer Proyecto!</p>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">¡Crea tu primer Proyecto!</p>
         </field>
     </record>
 
 
- <menuitem
+    <menuitem
         id="menu_project_root"
         name="Proyectos"
         parent="worker_root"
-        sequence="20"/>
-    
+        sequence="20" />
+
     <menuitem
         id="menu_project"
         name="Listado de proyectos"
-        parent="menu_project_root"   
+        parent="menu_project_root"
         action="project_action"
-        sequence="10"/>
+        sequence="10" />
 
 </odoo>
