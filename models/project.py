@@ -24,10 +24,8 @@ class EnterpriseProject(models.Model):
         ('cancel','Cancelado')
     ],string="Status",default='draft',tracking = True)
     
-    worker_ids = fields.One2many('person.worker','name',string = 'Trabajadores asignados',tracking = True)
-    # worker_count =fields.Integer(string='Número de empleados', compute='get_workers_count',tracking = True)
+    project_lines = fields.One2many('enterprise.project.lines','project_id',string="Project Lines",tracking=True)
     
-    project_lines = fields.One2many('enterprise.project.lines','project_id',string="Project Lines")
 
     
     #Métodos
@@ -56,6 +54,7 @@ class EnterpriseProjectLines(models.Model):
     _name="enterprise.project.lines"
     _description="Project Lines"
 
-    worker_id = fields.Many2one('person.worker',string ='Trabajador/a asignado')
-    worker_role =fields.Many2one('person.worker','role',string='Puesto de trabajo')
-    project_id = fields.Many2one('enterprise.project', string ='Id Proyecto')
+    worker_id = fields.Many2one('person.worker',string ='Trabajador/a asignado',tracking = True)
+    worker_role =fields.Selection(related='worker_id.role', tracking = True)
+
+    project_id = fields.Many2one('enterprise.project', string ='Id Proyecto',tracking = True)

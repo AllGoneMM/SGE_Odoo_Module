@@ -13,7 +13,7 @@
                 <field name="age"></field>
                 <field name="description"></field>
                 <field name="role"></field>
-                <field name="project_id"></field>
+
                 
 
                 <templates>
@@ -30,10 +30,6 @@
                                         Puesto de trabajo: <field name="role"></field>
                                     </li>
 
-                                    <li> 
-                                        Proyecto asignado: <field name="project_id"></field>
-                                    </li>
-                                    
                                     <li> 
                                         Edad: <field name="age"></field>
                                     </li>
@@ -82,7 +78,6 @@
         <field name="arch" type="xml">
             <tree >
                 <field name="name"></field>
-                <field name="project_id"></field>
                  <field name="role"></field>
                 <field name="gender"></field>
                 <field name="age"></field>
@@ -108,8 +103,6 @@
                         <group name="rigth_group" string="Otros asuntos">
                             <field name="role"></field>
                             <field name="description"></field>
-                            <field name="project_id"></field>
-                            <field name="deadLine"></field>
                         </group>
                     </group>
                 </sheet>
@@ -129,16 +122,12 @@
     </record>
 
     <!--Definiciónes del menu principal - similar a NAV en HTML -->
-    <menuitem
-        id="worker_root"
-        name="SGE Pablo y Mykyta"
-        sequence="10"/>
 
     <menuitem
         id="enterprise_worker_root"
         name="Trabajadores"
         parent="worker_root"
-        sequence="10"/>
+        sequence="20"/>
     
     <menuitem
         id="hospital_worker"

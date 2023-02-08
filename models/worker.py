@@ -41,8 +41,11 @@ class PersonWorker(models.Model):
 
     description = fields.Text(string = 'Descripción',tracking = True)
 
-    project_id = fields.Many2one('enterprise.project', string="Proyecto asignado", required=True,tracking = True)
+    project_id = fields.Many2one('enterprise.project', string="Proyecto asignado",tracking=True)
 
+    
+
+    #project_name = fields.Char(related='project_id.name',string="Nombre del proyecto asignado",tracking=True)
     deadLine = fields.Date(string='Fecha final',related='project_id.deadLine',tracking=True)
     
     
