@@ -156,10 +156,7 @@
     </record>
 
 
-    <menuitem
-        id="worker_root"
-        name="SGE Pablo y Mykyta"
-        sequence="10"/>
+
 
     <menuitem
         id="menu_project_root"

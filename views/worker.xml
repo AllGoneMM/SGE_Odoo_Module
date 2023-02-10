@@ -124,13 +124,18 @@
     <!--Definiciónes del menu principal - similar a NAV en HTML -->
 
     <menuitem
+        id="worker_root"
+        name="SGE Pablo y Mykyta"
+        sequence="10"/>
+
+    <menuitem
         id="enterprise_worker_root"
         name="Trabajadores"
         parent="worker_root"
         sequence="20"/>
     
     <menuitem
-        id="hospital_worker"
+        id="enterprise_worker"
         name="Lista de trabajadores"
         parent="enterprise_worker_root"
         action ="worker_action"
